@@ -1,6 +1,6 @@
 spring:
   application:
-    name: spring-cloud-config-client
+    name: hello-application
   cloud:
     config:
       uri: http://localhost:${config.port:8888}
