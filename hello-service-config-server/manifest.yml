@@ -1,0 +1,7 @@
+---
+applications:
+ - name: hello-service
+   path: target/hello-service.jar
+   random-route: true
+   services:
+    - config-server

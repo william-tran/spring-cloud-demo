@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: hello-service
+eureka:
+  instance:
+    hostname: ${vcap.application.uris[0]}
+    nonSecurePort: 80

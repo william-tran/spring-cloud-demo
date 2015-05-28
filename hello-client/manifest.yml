@@ -1,0 +1,5 @@
+---
+applications:
+ - name: hello-client
+   path: target/hello-client.jar
+   random-route: true
