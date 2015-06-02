@@ -10,7 +10,6 @@ This app requires [hello-service-eureka](https://github.com/willtran-/spring-clo
 
   ```
 cd ../hello-service-eureka
-mvn package
 cf push hello-service-blue --no-start
 cf set-env hello-service-blue SPRING_PROFILES_ACTIVE blue
 cf start hello-service-blue
