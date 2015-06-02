@@ -24,4 +24,6 @@ cf start hello-service-green
 ## To test the app:
 ``` curl [the random route outputted by cf push] ```
 
-You should see the value returned by either ```hello-service-blue``` ("Hello blue!") or ```hello-service-green``` ("Hello green!"), and this should switch each time you run ```curl```. If you stop either  ```hello-service-blue``` or ```hello-service-green```, you should only see responses from the live service. Try starting and stopping each of the blue and green services. 
+You should see the value returned by either ```hello-service-blue``` ("Hello blue!") or ```hello-service-green``` ("Hello green!"), and this should switch each time you run ```curl```. The switching occurs due to the Ribbon internal load balancer that the [RestTemplate uses under the hood](https://github.com/willtran-/spring-cloud-demo/blob/b2cbefeb8bdcf7edf6b21b36aff9c96c4365cedd/hello-client-eureka/src/main/java/demo/HelloClientEureka.java#L36-L41). This RestTemplate is autoconfigured for your application when you use ```@EnableServiceDiscovery```.
+
+If you stop either  ```hello-service-blue``` or ```hello-service-green```, for a minute you'll see responses for both the live server and errors due to the other server not being reachable. These errors can be avoided in the [hello-client-hystrix](https://github.com/willtran-/spring-cloud-demo/hello-client-hystrix) example. Try starting and stopping each of the blue and green services. 
