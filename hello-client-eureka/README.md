@@ -2,8 +2,9 @@
 Makes a call to hello-service with a URI provided by the **Service Registry for Pivotal Cloud Foundry**.
 
 ## hello-service setup
-This app requires hello-service-eureka to be running. In this example we'll do a blue-green deployment of hello-service-eureka, and consume that in hello-client-eureka.
+This app requires [hello-service-eureka](https://github.com/willtran-/spring-cloud-demo/tree/master/hello-service-eureka) to be running. In this example we'll do a blue-green deployment of hello-service-eureka, and consume that in hello-client-eureka.
 
+1. Run through the setup in [hello-service-eureka](https://github.com/willtran-/spring-cloud-demo/tree/master/hello-service-eureka)
 1. Shut down any running instances of hello-service.
 1. Run the following commands to start both a blue and a green deployment of hello-service-eureka:
 
