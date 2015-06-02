@@ -26,7 +26,7 @@ cf set-env hello-service SPRING_PROFILES_ACTIVE development
 cf restart hello-service
 ```
 
-to make the app use hello-service-development.yml. To change the log level at runtime, update the value in your configuration hosted on github:
+to make the app use [hello-service-development.yml](https://github.com/willtran-/spring-cloud-config/blob/master/hello-service.yml). To change the log level at runtime, update the value in your configuration hosted on github:
 
 ```
 logging.level:
