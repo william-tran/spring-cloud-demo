@@ -10,7 +10,12 @@ If a Service Registry called ```eureka``` hasn't been set up in the space, you'l
 * Use ```eureka``` as the name of the service instance.
 
 ## To run on your CF environment:
-``` mvn clean package && cf push ```
+``` 
+mvn clean package
+cf push --no-start
+cf set-env hello-service CF_TARGET https://api.[your cf environment]
+cf start hello-service
+```
 This will push the app as hello-service to the currently targeted space, using a random route, and bind the app to the services ```config-server``` and ```eureka```.
 
 ## To test the app:

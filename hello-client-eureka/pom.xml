@@ -25,11 +25,11 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka</artifactId>
 		</dependency>
-        <dependency>
-            <groupId>io.pivotal.spring.cloud</groupId>
-            <artifactId>spring-cloud-pivotal-cloudfoundry-connector</artifactId>
-            <version>1.0.0.M1</version>
-        </dependency>
+		<dependency>
+			<groupId>io.pivotal.spring.cloud</groupId>
+			<artifactId>spring-cloud-pivotal-cloudfoundry-connector</artifactId>
+			<version>1.0.0.M1</version>
+		</dependency>
 		<dependency>
 			<groupId>io.pivotal.spring.cloud</groupId>
 			<artifactId>spring-cloud-pivotal-spring-connector</artifactId>
@@ -43,11 +43,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>io.pivotal.spring.cloud</groupId>
+			<artifactId>cloudfoundry-certificate-truster</artifactId>
+			<version>1.0.0.BUILD-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 
 	<build>
-	    <finalName>hello-client</finalName>
+		<finalName>hello-client</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -60,6 +65,13 @@
 		<repository>
 			<id>spring-milestone</id>
 			<url>https://repo.spring.io/libs-milestone</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>spring-snapshot</id>
+			<url>https://repo.spring.io/libs-snapshot</url>
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>

@@ -9,7 +9,12 @@ If a Config Server called ```config-server``` hasn't been set up in the space, y
 3. Use github, and the url to your fork, eg ```https://github.com/my-github-account/spring-cloud-config``` in the server's configuration.
 
 ## To run on your CF environment:
-``` mvn clean package && cf push ```
+``` 
+mvn clean package
+cf push --no-start
+cf set-env hello-service CF_TARGET https://api.[your cf environment]
+cf start hello-service
+```
 This will push the app as hello-service to the currently targeted space, using a random route, and bind the app to the ```config-server``` service.
 
 ## To test the app:

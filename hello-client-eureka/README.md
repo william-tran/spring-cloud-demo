@@ -12,14 +12,23 @@ This app requires [hello-service-eureka](https://github.com/willtran-/spring-clo
 cd ../hello-service-eureka
 cf push hello-service-blue --no-start
 cf set-env hello-service-blue SPRING_PROFILES_ACTIVE blue
+cf set-env hello-service-blue CF_TARGET https://api.[your cf environment]
 cf start hello-service-blue
 cf push hello-service-green --no-start
 cf set-env hello-service-green SPRING_PROFILES_ACTIVE green
+cf set-env hello-service-green CF_TARGET https://api.[your cf environment]
 cf start hello-service-green
   ```
 
 ## To run on your CF environment:
-```cd``` to the ```hello-client-eureka``` folder and ```mvn clean package && cf push``` to push the app as hello-client to the currently targeted space, using a random route
+```cd``` to the ```hello-client-eureka``` folder and
+``` 
+mvn clean package
+cf push --no-start
+cf set-env hello-client CF_TARGET https://api.[your cf environment]
+cf start hello-client
+```
+to push the app as hello-client to the currently targeted space, using a random route
 
 ## To test the app:
 ``` curl [the random route outputted by cf push] ```

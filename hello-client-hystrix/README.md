@@ -10,7 +10,14 @@ If a Circuit Breaker called ```hystrix``` hasn't been set up in the space, you'l
 * Use ```hystrix``` as the name of the service instance.
 
 ## To run on your CF environment:
-Run ```mvn clean package && cf push``` to push the app as hello-client to the currently targeted space, using a random route
+Run 
+```
+mvn clean package
+cf push --no-start
+cf set-env hello-client CF_TARGET https://api.[your cf environment]
+cf start hello-client
+``` 
+to push the app as hello-client to the currently targeted space, using a random route
 
 ## To test the app:
 ``` $ while true; do curl [the random route outputted by cf push]; done ```

@@ -1,5 +1,7 @@
 package demo;
 
+import io.pivotal.springcloud.ssl.CloudFoundryCertificateTruster;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -19,36 +21,42 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 @EnableCircuitBreaker
 public class HelloClientHystrix {
 
-    public static void main(String[] args) {
-        SpringApplication.run(HelloClientHystrix.class, args);
-    }
+	public static void main(String[] args) {
+		CloudFoundryCertificateTruster.trustApiCertificate();
+		SpringApplication.run(HelloClientHystrix.class, args);
+	}
 
-    @Autowired
-    private HelloService helloService;
+	@Autowired
+	private HelloService helloService;
 
-    @RequestMapping("/")
-    public String hello() {
-        return helloService.getGreeting();
-    }
+	@RequestMapping("/")
+	public String hello() {
+		return helloService.getGreeting();
+	}
 
-    @Component
-    public static class HelloService {
+	@Component
+	public static class HelloService {
 
-        @Value("${helloServiceUri}")
-        private String helloServiceUri;
+		@Value("${helloServiceUri}")
+		private String helloServiceUri;
 
-        @Autowired
-        private RestTemplate restTemplate;
+		@Autowired
+		private RestTemplate restTemplate;
 
-        @HystrixCommand(fallbackMethod = "getDefault")
-        public String getGreeting() {
-            return restTemplate.getForObject(helloServiceUri, String.class);
-        }
+		@HystrixCommand(fallbackMethod = "getDefault")
+		public String getGreeting() {
+			try {
+				return restTemplate.getForObject(helloServiceUri, String.class);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw e;
+			}
+		}
 
-        String getDefault() {
-            return "hello... something?";
-        }
+		String getDefault() {
+			return "hello... something?";
+		}
 
-    }
+	}
 
 }

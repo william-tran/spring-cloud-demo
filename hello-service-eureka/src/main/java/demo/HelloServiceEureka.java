@@ -1,5 +1,7 @@
 package demo;
 
+import io.pivotal.springcloud.ssl.CloudFoundryCertificateTruster;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloServiceEureka {
 
     public static void main(String[] args) {
+    	CloudFoundryCertificateTruster.trustApiCertificate();
         SpringApplication.run(HelloServiceEureka.class, args);
     }
 
