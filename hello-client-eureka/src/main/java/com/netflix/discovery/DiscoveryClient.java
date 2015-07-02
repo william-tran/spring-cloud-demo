@@ -46,6 +46,7 @@ import com.netflix.servo.monitor.Monitors;
 import com.netflix.servo.monitor.Stopwatch;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.filter.ClientFilter;
 import com.sun.jersey.api.client.filter.GZIPContentEncodingFilter;
 import com.sun.jersey.client.apache4.ApacheHttpClient4;
 import org.slf4j.Logger;
@@ -58,6 +59,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response.Status;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -187,6 +189,12 @@ public class DiscoveryClient implements LookupService {
 
         @Inject(optional = true)
         private Provider<HealthCheckHandler> healthCheckHandlerProvider;
+        
+        private Collection<ClientFilter> additionalFilters;
+        
+        public void setAdditionalFilters(Collection<ClientFilter> additionalFilters) {
+            this.additionalFilters = additionalFilters;
+        }
     }
 
     public DiscoveryClient(InstanceInfo myInfo, EurekaClientConfig config) {
@@ -313,6 +321,13 @@ public class DiscoveryClient implements LookupService {
             String ip = instanceInfo == null ? null : instanceInfo.getIPAddr();
             EurekaClientIdentity identity = new EurekaClientIdentity(ip);
             discoveryApacheClient.addFilter(new EurekaIdentityHeaderFilter(identity));
+            
+            // add additional ClientFilters if specified
+            if (args.additionalFilters != null) {
+                for (ClientFilter filter : args.additionalFilters) {
+                    discoveryApacheClient.addFilter(filter);
+                }
+            }
 
         } catch (Throwable e) {
             throw new RuntimeException("Failed to initialize DiscoveryClient!", e);
