@@ -16,12 +16,18 @@
 
 package org.springframework.cloud.netflix.eureka;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.netflix.appinfo.ApplicationInfoManager;
 import com.netflix.appinfo.EurekaInstanceConfig;
+import com.netflix.discovery.DiscoveryClient.DiscoveryClientOptionalArgs;
 import com.netflix.discovery.DiscoveryManager;
 import com.netflix.discovery.EurekaClientConfig;
+import com.sun.jersey.api.client.filter.ClientFilter;
 
 /**
  * @author Spencer Gibb
@@ -34,10 +40,21 @@ public class DiscoveryManagerInitializer {
 	@Autowired
 	private EurekaInstanceConfig instanceConfig;
 
+	@Autowired(required = false)
+	private Collection<DiscoveryRequestDecorator> requestDecorators;
+
 	public synchronized void init() {
 		if (DiscoveryManager.getInstance().getDiscoveryClient() == null) {
+			DiscoveryClientOptionalArgs args = new DiscoveryClientOptionalArgs();
+			if (requestDecorators != null) {
+				List<ClientFilter> filters = new ArrayList<ClientFilter>();
+				for (DiscoveryRequestDecorator decorator : requestDecorators) {
+					filters.add(new ClientFilterAdapter(decorator));
+				}
+				args.setAdditionalFilters(filters);
+			}
 			DiscoveryManager.getInstance().initComponent(this.instanceConfig,
-					this.clientConfig);
+					this.clientConfig, args);
 		}
 		if (ApplicationInfoManager.getInstance().getInfo() == null) {
 			ApplicationInfoManager.getInstance().initComponent(this.instanceConfig);
