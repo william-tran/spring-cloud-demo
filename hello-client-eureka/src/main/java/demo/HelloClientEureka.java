@@ -1,7 +1,5 @@
 package demo;
 
-import io.pivotal.springcloud.ssl.CloudFoundryCertificateTruster;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -18,7 +16,6 @@ import org.springframework.web.client.RestTemplate;
 public class HelloClientEureka {
 
     public static void main(String[] args) {
-    	CloudFoundryCertificateTruster.trustApiCertificate();
         SpringApplication.run(HelloClientEureka.class, args);
     }
 
