@@ -1,8 +1,7 @@
 package demo;
 
-import io.pivotal.springcloud.ssl.CloudFoundryCertificateTruster;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,7 +17,6 @@ import org.springframework.web.client.RestTemplate;
 public class HelloClientEureka {
 
     public static void main(String[] args) {
-    	CloudFoundryCertificateTruster.trustApiCertificate();
         SpringApplication.run(HelloClientEureka.class, args);
     }
 
@@ -26,17 +24,23 @@ public class HelloClientEureka {
     private HelloService helloService;
 
     @RequestMapping("/")
-    public String hello() {
+    public String callHelloService() {
         return helloService.getGreeting();
+    }
+    
+    @RequestMapping("/greeting")
+    public String greeting() {
+        return "Howdy";
     }
 
     @Component
     public static class HelloService {
 
-        @Value("${helloServiceUri}")
+        @Value("http://${spring.application.name}/greeting")
         private String helloServiceUri;
 
         @Autowired
+        @Qualifier("loadBalancedRestTemplate")
         private RestTemplate restTemplate;
 
         public String getGreeting() {

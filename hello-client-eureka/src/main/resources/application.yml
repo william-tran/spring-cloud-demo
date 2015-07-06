@@ -1,1 +1,17 @@
-helloServiceUri: https://hello-service/
+spring:
+  application:
+    name: eureka-oauth-test
+
+server.port: 9999
+
+authServer:
+  uri: http://localhost:8080/uaa
+
+security.basic.enabled: false
+
+eureka:
+  client:
+    oauth2:
+      clientId: oauth_showcase_client_credentials
+      clientSecret: secret
+      accessTokenUri: ${authServer.uri}/oauth/token
