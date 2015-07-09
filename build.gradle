@@ -1,0 +1,73 @@
+buildscript {
+	repositories {
+		mavenCentral()
+		maven { url "https://repo.spring.io/plugins-release" }
+		maven { url 'https://repo.spring.io/libs-release' }
+	}
+
+	dependencies {
+		classpath('org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE')
+		classpath('io.spring.gradle:dependency-management-plugin:0.5.1.RELEASE')
+	}
+	ext {
+		springCloudVersion = "1.0.0.M1"
+	}
+}
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'eclipse'
+	apply plugin: 'idea'
+	apply plugin: 'io.spring.dependency-management'
+	apply plugin: 'spring-boot'
+
+	repositories {
+		mavenCentral()
+		maven { url 'https://repo.spring.io/libs-release' }
+		maven { url 'https://repo.spring.io/libs-snapshot' }
+	}
+
+	dependencyManagement {
+		imports {
+			mavenBom "io.pivotal.spring.cloud:spring-cloud-services-starter-parent:${springCloudVersion}"
+		}
+	}
+
+	dependencies {
+		compile("org.springframework.boot:spring-boot-starter-web")
+		compile("org.springframework.boot:spring-boot-starter-actuator")
+	}
+}
+
+project(':hello-service') {
+
+}
+
+project(':hello-service-config-server') {
+	dependencies {
+		compile("io.pivotal.spring.cloud:spring-cloud-services-starter-config-client")
+	}
+}
+
+project(':hello-service-eureka') {
+	dependencies {
+		compile("io.pivotal.spring.cloud:spring-cloud-services-starter-config-client")
+		compile("io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry")
+	}
+}
+
+project(':hello-client') {
+
+}
+
+project(':hello-client-eureka') {
+	dependencies {
+		compile("io.pivotal.spring.cloud:spring-cloud-services-starter-circuit-breaker")
+	}
+}
+
+project(':hello-client-hystrix') {
+	dependencies {
+		compile("io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry")
+		compile("io.pivotal.spring.cloud:spring-cloud-services-starter-circuit-breaker")
+	}
+}

@@ -1,7 +1,8 @@
 ---
 applications:
  - name: hello-client
-   path: target/hello-client.jar
+   path: build/libs/hello-client-eureka.jar
    random-route: true
+   memory: 512M
    services:
     - eureka

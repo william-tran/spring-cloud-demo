@@ -1,0 +1,6 @@
+include "hello-service"
+include "hello-service-config-server"
+include "hello-service-eureka"
+include "hello-client"
+include "hello-client-eureka"
+include "hello-client-hystrix"

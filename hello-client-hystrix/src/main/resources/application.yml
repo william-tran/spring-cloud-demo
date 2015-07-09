@@ -1,4 +1,5 @@
 helloServiceUri: http://hello-service/
+spring.application.name : ${vcap.application.name}
 eureka:
   instance:
     hostname: ${vcap.application.uris[0]}

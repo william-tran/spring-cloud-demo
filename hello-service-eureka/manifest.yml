@@ -1,8 +1,9 @@
 ---
 applications:
  - name: hello-service
-   path: target/hello-service.jar
+   path: build/libs/hello-service-eureka.jar
    random-route: true
+   memory: 512M
    services:
     - config-server
     - eureka

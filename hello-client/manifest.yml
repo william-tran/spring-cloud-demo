@@ -1,5 +1,6 @@
 ---
 applications:
  - name: hello-client
-   path: target/hello-client.jar
+   path: build/libs/hello-client.jar
    random-route: true
+   memory: 512M
