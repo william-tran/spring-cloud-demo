@@ -5,3 +5,4 @@ target
 .springBeans
 .idea
 build
+.gradle
