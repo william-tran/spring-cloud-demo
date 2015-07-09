@@ -1,1 +1,4 @@
 hello.message: Hello local configuration
+spring.application.name : ${vcap.application.name}
+
+
