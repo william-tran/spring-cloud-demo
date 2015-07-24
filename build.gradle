@@ -35,6 +35,7 @@ subprojects {
 	dependencies {
 		compile("org.springframework.boot:spring-boot-starter-web")
 		compile("org.springframework.boot:spring-boot-starter-actuator")
+		compile("io.pivotal.spring.cloud:cloudfoundry-certificate-truster:1.0.0.BUILD-SNAPSHOT")
 	}
 }
 
