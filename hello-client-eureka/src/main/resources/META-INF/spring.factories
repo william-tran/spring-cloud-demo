@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.springframework.cloud.netflix.eureka.EurekaOAuth2AutoConfiguration
+org.springframework.cloud.netflix.eureka.EurekaOAuth2AutoConfiguration,\
+org.springframework.cloud.netflix.eureka.EurekaOAuth2ReflectionShim

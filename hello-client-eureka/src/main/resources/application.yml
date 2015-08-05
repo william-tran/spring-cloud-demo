@@ -12,6 +12,6 @@ security.basic.enabled: false
 eureka:
   client:
     oauth2:
-      clientId: oauth_showcase_client_credentials
+      clientId: eureka-12345-client
       clientSecret: secret
       accessTokenUri: ${authServer.uri}/oauth/token
