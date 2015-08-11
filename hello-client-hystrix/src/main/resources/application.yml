@@ -1,3 +1,4 @@
+security.ignored: /
 helloServiceUri: http://hello-service/
 spring.application.name : ${vcap.application.name}
 eureka:
