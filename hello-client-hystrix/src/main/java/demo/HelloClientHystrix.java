@@ -6,7 +6,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -26,10 +28,18 @@ public class HelloClientHystrix {
     @Autowired
     private HelloService helloService;
 
+	@Autowired
+	private LoadBalancerClient lbclient;
+
     @RequestMapping("/")
     public String hello() {
         return helloService.getGreeting();
     }
+
+	@RequestMapping("/lbclient/{serviceId}")
+	public ServiceInstanceData lbUri(@PathVariable String serviceId) {
+		return new ServiceInstanceData(lbclient.choose(serviceId));
+	}
 
     @Component
     public static class HelloService {
