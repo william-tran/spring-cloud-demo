@@ -1,8 +1,4 @@
 security.ignored: /
 hello.message: Hello local configuration
 spring.application.name : ${vcap.application.name}
-eureka:
-  instance:
-    hostname: ${vcap.application.uris[0]}
-    nonSecurePort: 80
 

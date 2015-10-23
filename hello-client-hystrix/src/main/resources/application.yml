@@ -1,9 +1,4 @@
 security.ignored: /
-helloServiceUri: http://hello-service/
+helloServiceUri: ${HELLO_SERVICE_URI:https://hello-service/}
 spring.application.name : ${vcap.application.name}
-eureka:
-  instance:
-    hostname: ${vcap.application.uris[0]}
-    nonSecurePort: 80
-    metadataMap:
-      instanceId: ${vcap.application.name}
+ribbon.IsSecure: ${RIBBON_SECURE:true}

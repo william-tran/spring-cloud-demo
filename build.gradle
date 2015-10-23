@@ -10,7 +10,7 @@ buildscript {
 		classpath('io.spring.gradle:dependency-management-plugin:0.5.1.RELEASE')
 	}
 	ext {
-		springCloudVersion = "1.0.0.RC1"
+		springCloudVersion = "1.0.0.BUILD-SNAPSHOT"
 	}
 }
 subprojects {
@@ -61,7 +61,7 @@ project(':hello-client') {
 
 project(':hello-client-eureka') {
 	dependencies {
-		compile("io.pivotal.spring.cloud:spring-cloud-services-starter-circuit-breaker")
+		compile("io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry")
 	}
 }
 
