@@ -1,4 +1,8 @@
 buildscript {
+        ext {
+                scsVersion = "1.1.0.BUILD-SNAPSHOT"
+                springBootVersion = "1.3.2.RELEASE"
+        }
 	repositories {
 		mavenCentral()
 		maven { url "https://repo.spring.io/plugins-release" }
@@ -6,11 +10,8 @@ buildscript {
 	}
 
 	dependencies {
-		classpath('org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE')
+		classpath('org.springframework.boot:spring-boot-gradle-plugin:1.3.2.RELEASE')
 		classpath('io.spring.gradle:dependency-management-plugin:0.5.1.RELEASE')
-	}
-	ext {
-		springCloudVersion = "1.0.0.BUILD-SNAPSHOT"
 	}
 }
 subprojects {
@@ -18,7 +19,6 @@ subprojects {
 	apply plugin: 'eclipse'
 	apply plugin: 'idea'
 	apply plugin: 'io.spring.dependency-management'
-	apply plugin: 'spring-boot'
 
 	repositories {
 		mavenCentral()
@@ -28,9 +28,12 @@ subprojects {
 
 	dependencyManagement {
 		imports {
-			mavenBom "io.pivotal.spring.cloud:spring-cloud-services-starter-parent:${springCloudVersion}"
+			mavenBom "io.pivotal.spring.cloud:spring-cloud-services-starter-parent:${scsVersion}"
+			mavenBom "org.springframework.boot:spring-boot-starter-parent:${springBootVersion}"
 		}
 	}
+
+        apply plugin: 'spring-boot'
 
 	dependencies {
 		compile("org.springframework.boot:spring-boot-starter-web")
