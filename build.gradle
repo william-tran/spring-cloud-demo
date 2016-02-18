@@ -1,39 +1,38 @@
 buildscript {
-        ext {
-                scsVersion = "1.1.0.BUILD-SNAPSHOT"
-                springBootVersion = "1.3.2.RELEASE"
-        }
+	ext {
+		scsVersion = "1.1.0.BUILD-SNAPSHOT"
+		springBootVersion = "1.3.2.RELEASE"
+	}
 	repositories {
 		mavenCentral()
 		maven { url "https://repo.spring.io/plugins-release" }
-		maven { url 'https://repo.spring.io/libs-release' }
+		maven { url "https://repo.spring.io/libs-release" }
 	}
 
 	dependencies {
-		classpath('org.springframework.boot:spring-boot-gradle-plugin:1.3.2.RELEASE')
-		classpath('io.spring.gradle:dependency-management-plugin:0.5.1.RELEASE')
+		classpath("io.spring.gradle:dependency-management-plugin:0.5.3.RELEASE")
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 	}
 }
 subprojects {
-	apply plugin: 'java'
-	apply plugin: 'eclipse'
-	apply plugin: 'idea'
-	apply plugin: 'io.spring.dependency-management'
+	apply plugin: "java"
+	apply plugin: "eclipse"
+	apply plugin: "idea"
+	apply plugin: "io.spring.dependency-management"
 
 	repositories {
 		mavenCentral()
-		maven { url 'https://repo.spring.io/libs-release' }
-		maven { url 'https://repo.spring.io/libs-snapshot' }
+		maven { url "https://repo.spring.io/libs-release" }
+		maven { url "https://repo.spring.io/libs-snapshot" }
 	}
 
 	dependencyManagement {
 		imports {
 			mavenBom "io.pivotal.spring.cloud:spring-cloud-services-starter-parent:${scsVersion}"
-			mavenBom "org.springframework.boot:spring-boot-starter-parent:${springBootVersion}"
 		}
 	}
 
-        apply plugin: 'spring-boot'
+	apply plugin: "spring-boot"
 
 	dependencies {
 		compile("org.springframework.boot:spring-boot-starter-web")
@@ -41,34 +40,34 @@ subprojects {
 	}
 }
 
-project(':hello-service') {
+project(":hello-service") {
 
 }
 
-project(':hello-service-config-server') {
+project(":hello-service-config-server") {
 	dependencies {
 		compile("io.pivotal.spring.cloud:spring-cloud-services-starter-config-client")
 	}
 }
 
-project(':hello-service-eureka') {
+project(":hello-service-eureka") {
 	dependencies {
 		compile("io.pivotal.spring.cloud:spring-cloud-services-starter-config-client")
 		compile("io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry")
 	}
 }
 
-project(':hello-client') {
+project(":hello-client") {
 
 }
 
-project(':hello-client-eureka') {
+project(":hello-client-eureka") {
 	dependencies {
 		compile("io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry")
 	}
 }
 
-project(':hello-client-hystrix') {
+project(":hello-client-hystrix") {
 	dependencies {
 		compile("io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry")
 		compile("io.pivotal.spring.cloud:spring-cloud-services-starter-circuit-breaker")
