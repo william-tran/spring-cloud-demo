@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
@@ -42,7 +43,7 @@ public class HelloClientEureka {
         private String helloServiceUri;
 
         @Autowired
-        private RestTemplate restTemplate;
+        private RestOperations restTemplate;
 
         public String getGreeting() {
             return restTemplate.getForObject(helloServiceUri, String.class);
