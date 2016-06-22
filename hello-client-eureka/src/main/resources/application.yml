@@ -1,4 +1,3 @@
 security.basic.enabled: false
 helloServiceUri: ${HELLO_SERVICE_URI:https://hello-service/}
 spring.application.name : ${vcap.application.name}
-ribbon.IsSecure: ${RIBBON_SECURE:true}
