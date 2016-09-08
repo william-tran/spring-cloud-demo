@@ -2,6 +2,7 @@ package demo;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -18,6 +19,9 @@ public class HelloServiceConfigServer {
     public static void main(String[] args) {
         SpringApplication.run(HelloServiceConfigServer.class, args);
     }
+    
+	@Value("${vcap.application.uris[0]:unknown}")
+	private String hostname;
 
     @Bean
     @RefreshScope
@@ -29,7 +33,7 @@ public class HelloServiceConfigServer {
     @RequestMapping("/")
     public String hello() {
         log.debug("responding with {}", helloProperties().getMessage());
-        return helloProperties().getMessage();
+        return "Message from " + hostname + " : " + helloProperties().getMessage();
     }
 
     public static class HelloProperties {

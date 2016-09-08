@@ -5,9 +5,9 @@ buildscript {
 		}
 	}
 	ext {
-		setExtProperty("scsStartersVersion","1.1.0.RC1")
-		setExtProperty("springCloudVersion","Brixton.SR1")
-		springBootVersion = "1.3.5.RELEASE"
+		setExtProperty("scsStartersVersion","1.1.3.BUILD-SNAPSHOT")
+		setExtProperty("springCloudVersion","Brixton.SR5")
+		springBootVersion = "1.3.7.RELEASE"
 	}
 	repositories {
 		mavenCentral()
