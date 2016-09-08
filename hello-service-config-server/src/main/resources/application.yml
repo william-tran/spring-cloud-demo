@@ -1,5 +1,5 @@
 security.ignored: /
 hello.message: Hello local configuration
-spring.application.name : ${vcap.application.name}
+spring.application.name : hello-service
 
 

@@ -1,6 +1,5 @@
 ---
 applications:
  - name: hello-service
-   path: path: build/libs/hello-service.jar
-   random-route: true
+   path: build/libs/hello-service.jar
    memory: 512M

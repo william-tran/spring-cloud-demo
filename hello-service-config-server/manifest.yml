@@ -2,7 +2,6 @@
 applications:
  - name: hello-service
    path: build/libs/hello-service-config-server.jar
-   random-route: true
    memory: 512M
    services:
     - config-server

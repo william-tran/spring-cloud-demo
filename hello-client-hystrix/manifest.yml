@@ -2,7 +2,6 @@
 applications:
  - name: hello-client
    path: build/libs/hello-client-hystrix.jar
-   random-route: true
    memory: 512M
    services:
     - eureka
